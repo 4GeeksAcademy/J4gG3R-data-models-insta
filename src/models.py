@@ -46,8 +46,10 @@ class Comments(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     description: Mapped[str] = mapped_column(nullable=False)
     post_id: Mapped[int] = mapped_column(ForeignKey('post.id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'), nullable=False)
 
     post: Mapped["Post"] = relationship("Post", back_populates="comments")
+    user: Mapped["User"] = relationship("User", back_populates="comments")
 
     def serialize(self):
         return {
